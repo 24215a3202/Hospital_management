@@ -1,0 +1,1128 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Space+Grotesk:wght@500;600;700&display=swap");
+:root {
+  --hope-deep: #124c4a;
+  --hope-teal: #168277;
+  --hope-mint: #dff3ec;
+  --hope-coral: #e9785b;
+  --hope-ink: #173b3a;
+  --hope-surface: #f4faf7;
+  --hope-line: #b9d8d0;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  font-family: "Montserrat", sans-serif;
+}
+body {
+  background: #eaf3f0;
+}
+.container {
+  padding: 0 100px;
+}
+@media (max-width: 700px) {
+  .container {
+    padding: 0 20px;
+  }
+}
+.loading-overlay {
+  position: fixed;
+  margin: auto;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; 
+}
+
+.loading-gif {
+  width: 100px; 
+  height: 100px; 
+}
+select, button{
+  cursor: pointer;
+}
+.page {
+  min-height: 100vh;
+  background: var(--hope-surface);
+  padding: 42px clamp(24px, 4vw, 64px);
+}
+.admin-app {
+  min-height: 100vh;
+  display: flex;
+}
+.admin-main {
+  flex: 1;
+  min-width: 0;
+  margin-left: 260px;
+}
+.sidebar {
+  position: fixed;
+  inset: 0 auto 0 0;
+  z-index: 20;
+  width: 260px;
+  padding: 30px 20px 24px;
+  background: var(--hope-deep);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  box-shadow: 12px 0 30px rgba(18, 76, 74, 0.12);
+}
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 10px 34px;
+}
+.brand-mark {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: var(--hope-coral);
+  color: #fff;
+  font-size: 22px;
+  font-weight: 800;
+}
+.sidebar-brand strong,
+.sidebar-brand small {
+  display: block;
+}
+.sidebar-brand strong { font-size: 18px; }
+.sidebar-brand small { margin-top: 3px; color: #a9d1c9; font-size: 11px; }
+.sidebar .links {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.sidebar .links a,
+.logout-link {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  padding: 13px 14px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: #c4e1db;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  text-align: left;
+}
+.sidebar .links a:hover,
+.sidebar .links a.active {
+  background: #216b65;
+  color: #fff;
+}
+.sidebar .links svg,
+.logout-link svg { width: 20px; height: 20px; flex: none; }
+.logout-link {
+  margin-top: auto;
+  cursor: pointer;
+}
+.logout-link:hover { background: rgba(233, 120, 91, 0.18); color: #ffd4c8; }
+.wrapper { display: none; }
+@media (max-width: 900px) {
+  .admin-main { margin-left: 0; }
+  .sidebar { transform: translateX(-100%); transition: transform 0.25s ease; }
+  .sidebar.show { transform: translateX(0); }
+  .wrapper {
+    display: flex;
+    position: fixed;
+    z-index: 30;
+    top: 16px;
+    left: 16px;
+    width: 42px;
+    height: 42px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: var(--hope-deep);
+    color: #fff;
+    cursor: pointer;
+  }
+  .wrapper .hamburger { display: block; font-size: 22px; }
+}
+@media (max-width: 485px) {
+  .page {
+    padding: 76px 16px 28px;
+  }
+}
+@media (max-width: 460px) {
+  .logo {
+    width: 100%;
+  }
+}
+.form-title{
+  font-size: 1.75rem;
+  color: #111;
+  margin-bottom: 30px;
+}
+.form-component {
+  padding-top: 40px;
+  padding-bottom: 60px;
+  min-height: 100vh;
+  background: var(--hope-surface);
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+.form-component h2 {
+  color: gray;
+  letter-spacing: 4px;
+  margin-bottom: 30px;
+}
+.form-component h4 {
+  color: gray;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+.form-component p {
+  max-width: 750px;
+  color: gray;
+  margin-bottom: 20px;
+  text-align: center;
+}
+.form-component form {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  width: 550px;
+}
+.add-admin-form form {
+  width: 100%;
+}
+.form-component p:first-child {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--hope-teal);
+  margin-top: 30px;
+}
+.form-component form div {
+  display: flex;
+  gap: 30px;
+}
+.form-component form input,
+.form-component form select,
+.form-component form textarea {
+  flex: 1;
+  font-size: 20px;
+  padding: 10px 10px 10px 40px;
+  border-radius: 20px;
+  border: 1px solid var(--hope-line);
+}
+.form-component button {
+  margin-top: 15px;
+  padding: 10px 35px;
+  color: #fff;
+  font-weight: 700;
+  width: fit-content;
+  border: none;
+  border-radius: 20px;
+  font-size: 20px;
+  margin-bottom: 30px;
+  background: linear-gradient(to right, var(--hope-teal), var(--hope-deep));
+}
+
+.form-component .wrapper {
+  display: flex;
+  gap: 50px;
+}
+.form-component .wrapper .banner {
+  flex: 1;
+}
+.form-component .wrapper .banner:last-child {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.form-component .wrapper .banner:last-child img {
+  max-width: 450px;
+}
+@media (max-width: 888px) {
+  .form-component {
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+  .form-component form div {
+    flex-direction: column;
+  }
+}
+@media (max-width: 667px) {
+  .form-component form input,
+  .form-component form select,
+  .form-component form textarea {
+    font-size: 20px;
+    padding: 10px;
+    border-radius: 20px;
+  }
+}
+@media (max-width: 600px) {
+  .form-component form {
+    width: 100%;
+  }
+}
+@media (max-width: 485px) {
+  .add-admin-form {
+    padding: 30px 0;
+  }
+}
+
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.dashboard .banner:first-child {
+  height: 35vh;
+  display: flex;
+  gap: 20px;
+}
+.dashboard .banner:first-child .firstBox {
+  flex: 2;
+  display: flex;
+  align-items: center;
+  border-radius: 20px;
+  background: var(--hope-mint);
+  padding: 20px 20px 0 10px;
+ 
+}
+.dashboard .banner:first-child .firstBox img {
+  height: 100%;
+  flex: 1;
+}
+.dashboard .banner:first-child .firstBox .content {
+  flex: 2;
+}
+.dashboard .banner:first-child .firstBox .content div {
+  display: flex;
+  align-items: center;
+  font-size: 32px;
+  margin-bottom: 12px;
+}
+.dashboard .banner:first-child .firstBox .content div p {
+  margin-right: 10px;
+  font-size: 26px;
+}
+.dashboard .banner:first-child .firstBox .content div h5 {
+  color: var(--hope-coral);
+}
+.dashboard .banner:first-child .firstBox .content p {
+  font-size: 16px;
+}
+.dashboard .banner:first-child .secondBox {
+  background: var(--hope-deep);
+  color: #fff;
+}
+.dashboard .banner:first-child .thirdBox {
+  color: var(--hope-coral);
+  background: #fff;
+}
+.dashboard .banner:first-child .secondBox,
+.dashboard .banner:first-child .thirdBox {
+  flex: 1;
+  border-radius: 20px;
+  padding: 20px 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+}
+
+
+.dashboard .banner:first-child .secondBox p,
+.dashboard .banner:first-child .thirdBox p {
+  font-size: 24px;
+  font-weight: 600;
+}
+.dashboard .banner:first-child .secondBox h3,
+.dashboard .banner:first-child .thirdBox h3 {
+  font-size: 34px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+.dashboard .banner:last-child {
+  height: 65vh;
+  padding: 10px;
+  background: #fff;
+  border-radius: 20px;
+  overflow-x: scroll;
+}
+.dashboard .banner:last-child h5 {
+  font-size: 24px;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+  color: #111;
+}
+.dashboard .banner table {
+  width: 100%;
+  color: #111;
+  font-size: 20px;
+}
+.dashboard .banner table select {
+  font-size: 20px;
+  border: none;
+  outline: none;
+  width: 100%;
+  font-weight: 600;
+}
+.dashboard table td svg{
+  display: flex;
+  margin: 0 auto;
+}
+.dashboard table td .green{
+  font-size: 20px;
+  color: #16a34a;
+}
+.dashboard table td .red{
+  font-size: 20px;
+  color: #dc2626;
+}
+.dashboard .banner table select:focus {
+  outline: none;
+}
+.dashboard .banner table .value-pending {
+  color: #eab308;
+}
+.dashboard .banner table .value-accepted {
+  color: #16a34a;
+}
+.dashboard .banner table .value-rejected {
+  color: #dc2626;
+}
+.dashboard .banner table thead {
+  text-align: justify;
+  padding: 12px 0;
+}
+.dashboard .banner table thead th {
+  padding: 12px 0;
+}
+.dashboard .banner table tbody td {
+  padding: 12px 0;
+}
+@media (max-width: 1376px) {
+  .dashboard .banner:first-child .firstBox .content div,
+  .dashboard .banner:first-child .firstBox .content div p {
+    font-size: 26px;
+  }
+  .dashboard .banner:first-child .firstBox .content p {
+    font-size: 14px;
+  }
+  .dashboard .banner:first-child .secondBox p,
+  .dashboard .banner:first-child .thirdBox p,
+  .dashboard .banner:first-child .secondBox h3,
+  .dashboard .banner:first-child .thirdBox h3 {
+    font-size: 20px;
+  }
+}
+@media (max-width: 1020px) {
+  .dashboard {
+    height: fit-content;
+  }
+  .dashboard .banner:first-child,
+  .dashboard .banner:last-child {
+    flex-wrap: wrap;
+    height: fit-content;
+  }
+  .dashboard .banner:first-child .firstBox {
+    flex: none;
+    width: 100%;
+    height: 265px;
+  }
+  .dashboard .banner:first-child .secondBox,
+  .dashboard .banner:first-child .thirdBox {
+    height: 175px;
+  }
+}
+@media (max-width: 620px) {
+  .dashboard .banner:first-child .secondBox,
+  .dashboard .banner:first-child .thirdBox {
+    width: 100%;
+    flex: none;
+  }
+}
+@media (max-width: 485px) {
+  .dashboard .banner:first-child .firstBox {
+    flex-direction: column;
+    height: fit-content;
+    padding: 20px;
+  }
+  .dashboard .banner:first-child .firstBox img {
+    width: 270px;
+    height: 270px;
+    margin-bottom: 25px;
+  }
+  .dashboard .banner:first-child .firstBox div {
+    justify-content: center;
+  }
+}
+
+.doctors h1 {
+  color: var(--hope-teal);
+  margin-bottom: 30px;
+  font-size: 2.3rem;
+}
+.doctors .banner {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+  grid-gap: 20px;
+}
+.doctors .banner .card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.doctors .banner .card img {
+  width: 270px;
+  height: 270px;
+  border-radius: 100%;
+  margin-bottom: 20px;
+}
+.doctors .banner .card h4 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+}
+.doctors .banner .card div {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 20px;
+}
+.doctors .banner .card div p {
+  font-weight: 700;
+}
+.doctors .banner .card div p span {
+  font-weight: 500;
+}
+
+@media (max-width: 350px) {
+  .doctors .banner {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
+    grid-gap: 20px;
+  }
+}
+
+.messages h1 {
+  color: var(--hope-teal);
+  margin-bottom: 30px;
+  font-size: 2.3rem;
+}
+.messages .banner {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.messages .banner .card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+}
+.card:hover{
+  box-shadow: 0 0 18px rgba(30, 52, 127, 0.5);
+
+}
+.messages .banner .card div {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 20px;
+}
+.messages .banner .card div p {
+  font-weight: 700;
+}
+.messages .banner .card div p span {
+  font-weight: 500;
+}
+
+.add-doctor-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+  padding: 0;
+}
+.add-doctor-form form {
+  width: 100%;
+}
+.add-doctor-form form .first-wrapper {
+  display: flex;
+  gap: 30px;
+}
+.add-doctor-form form .first-wrapper div:first-child {
+  flex: 1;
+  flex-direction: column;
+  height: fit-content;
+}
+.add-doctor-form form .first-wrapper div:first-child img {
+  width: 100%;
+  height: 515px;
+  margin-bottom: 20px;
+}
+.add-doctor-form form .first-wrapper div:first-child input {
+  width: 100%;
+  padding: 10px;
+
+}
+.add-doctor-form
+  form
+  .first-wrapper
+  div:first-child
+  input:file-selector-button {
+  position: absolute;
+  width: 100%;
+}
+.add-doctor-form form .first-wrapper div:last-child {
+  flex: 2;
+  display: flex;
+  gap: 30px;
+  flex-direction: column;
+}
+.add-doctor-form form input,
+.add-doctor-form form select,
+.add-doctor-form form textarea {
+  flex: 1;
+  font-size: 20px;
+  padding: 10px 10px 10px 40px;
+  border-radius: 20px;
+  border: 1px solid gray;
+}
+.add-doctor-form button {
+  margin: auto;
+  padding: 10px 35px;
+  color: #fff;
+  font-weight: 700;
+  width: fit-content;
+  border: none;
+  border-radius: 20px;
+  font-size: 20px;
+  margin-bottom: 30px;
+  background: linear-gradient(to right, var(--hope-teal), var(--hope-deep));
+}
+button:hover {
+  background: linear-gradient(to left, var(--hope-teal), var(--hope-deep));
+  transform: scale(1.1);
+
+}
+
+@media (max-width: 945px) {
+  .add-doctor-form form .first-wrapper {
+    flex-direction: column;
+  }
+  .add-doctor-form form .first-wrapper div:first-child img {
+    height: auto;
+  }
+}
+input[type="date"]:before {
+  content: attr(placeholder);
+  color: var(--hope-ink);
+  margin-right: 0.5em;
+}
+input[type="time"]:before {
+  content: attr(placeholder);
+  color: var(--hope-ink);
+  margin-right: 0.5em;
+}
+
+/* Shared Hope Healthcare admin theme */
+:root {
+  --admin-ink: #122b3a;
+  --admin-ink-soft: #45606a;
+  --admin-paper: #f6f8f5;
+  --admin-surface: #ffffff;
+  --admin-mint: #d9eee7;
+  --admin-mint-strong: #a9d8c8;
+  --admin-coral: #e7785c;
+  --admin-coral-dark: #bd5945;
+  --admin-line: #d7e3df;
+  --admin-shadow: 0 18px 50px rgba(18, 43, 58, 0.09);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: var(--admin-ink);
+  background: var(--admin-paper);
+  font-family: "DM Sans", sans-serif;
+  overflow-x: hidden;
+}
+
+* {
+  font-family: "DM Sans", sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.sidebar-brand {
+  font-family: "Space Grotesk", sans-serif;
+  letter-spacing: -0.03em;
+}
+
+.admin-app {
+  background: var(--admin-paper);
+}
+
+.admin-main {
+  background: var(--admin-paper);
+}
+
+.page {
+  min-height: 100vh;
+  padding: 46px clamp(20px, 4vw, 64px);
+  background: var(--admin-paper);
+}
+
+.sidebar {
+  width: 252px;
+  padding: 26px 18px 20px;
+  background: var(--admin-ink);
+  box-shadow: 14px 0 36px rgba(18, 43, 58, 0.14);
+}
+
+.sidebar-brand {
+  padding: 8px 12px 40px;
+}
+
+.brand-mark {
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  background: var(--admin-coral);
+  font-family: "Space Grotesk", sans-serif;
+}
+
+.sidebar-brand strong {
+  color: #fff;
+  font-size: 17px;
+}
+
+.sidebar-brand small {
+  color: var(--admin-mint-strong);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.sidebar .links {
+  gap: 5px;
+}
+
+.sidebar .links a,
+.logout-link {
+  padding: 12px 14px;
+  border-radius: 4px;
+  color: #bad4ce;
+  font-size: 13px;
+}
+
+.sidebar .links a:hover,
+.sidebar .links a.active {
+  background: rgba(169, 216, 200, 0.14);
+  color: #fff;
+}
+
+.logout-link:hover {
+  background: rgba(231, 120, 92, 0.16);
+  color: #ffd4c8;
+}
+
+.wrapper {
+  border-radius: 4px;
+  background: var(--admin-ink);
+  box-shadow: 0 8px 22px rgba(18, 43, 58, 0.16);
+}
+
+.dashboard {
+  gap: 24px;
+}
+
+.dashboard .banner:first-child {
+  height: auto;
+  min-height: 250px;
+  gap: 18px;
+}
+
+.dashboard .banner:first-child .firstBox,
+.dashboard .banner:first-child .secondBox,
+.dashboard .banner:first-child .thirdBox,
+.dashboard .banner:last-child {
+  border-radius: 4px;
+  box-shadow: var(--admin-shadow);
+}
+
+.dashboard .banner:first-child .firstBox {
+  min-height: 250px;
+  padding: 24px;
+  background: var(--admin-mint);
+}
+
+.dashboard .banner:first-child .firstBox .content div {
+  font-family: "Space Grotesk", sans-serif;
+}
+
+.dashboard .banner:first-child .firstBox .content div p {
+  color: var(--admin-ink-soft);
+  font-size: 21px;
+}
+
+.dashboard .banner:first-child .firstBox .content div h5 {
+  color: var(--admin-coral-dark);
+  font-size: 25px;
+}
+
+.dashboard .banner:first-child .firstBox .content > p {
+  color: var(--admin-ink-soft);
+  line-height: 1.55;
+}
+
+.dashboard .banner:first-child .secondBox {
+  background: var(--admin-ink);
+}
+
+.dashboard .banner:first-child .thirdBox {
+  background: var(--admin-surface);
+}
+
+.dashboard .banner:first-child .secondBox p,
+.dashboard .banner:first-child .thirdBox p {
+  font-size: 15px;
+  letter-spacing: 0;
+}
+
+.dashboard .banner:first-child .secondBox h3,
+.dashboard .banner:first-child .thirdBox h3 {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 48px;
+}
+
+.dashboard .banner:first-child .secondBox h3 {
+  color: var(--admin-mint-strong);
+}
+
+.dashboard .banner:first-child .thirdBox {
+  color: var(--admin-coral-dark);
+}
+
+.dashboard .banner:first-child .thirdBox ul {
+  padding-left: 18px;
+  color: var(--admin-ink-soft);
+  font-size: 13px;
+  line-height: 1.75;
+}
+
+.dashboard .banner:last-child {
+  height: auto;
+  min-height: 330px;
+  padding: 24px;
+  background: var(--admin-surface);
+  overflow-x: auto;
+}
+
+.dashboard .banner:last-child h5 {
+  margin-bottom: 18px;
+  color: var(--admin-ink);
+  font-size: 21px;
+  letter-spacing: 0;
+}
+
+.dashboard .banner table {
+  min-width: 760px;
+  color: var(--admin-ink-soft);
+  font-size: 13px;
+  border-collapse: collapse;
+}
+
+.dashboard .banner table thead {
+  color: var(--admin-ink);
+  background: #f1f6f3;
+}
+
+.dashboard .banner table th,
+.dashboard .banner table td {
+  padding: 14px 12px;
+  border-bottom: 1px solid var(--admin-line);
+  text-align: left;
+}
+
+.dashboard .banner table select {
+  padding: 7px 8px;
+  color: inherit;
+  background: transparent;
+  border: 1px solid var(--admin-line);
+  border-radius: 3px;
+  font-size: 13px;
+}
+
+.dashboard .banner table .value-pending {
+  color: #b7791f;
+}
+
+.dashboard .banner table .value-accepted,
+.dashboard table td .green {
+  color: #2d8b70;
+}
+
+.dashboard .banner table .value-rejected,
+.dashboard table td .red {
+  color: var(--admin-coral-dark);
+}
+
+.doctors h1,
+.messages h1 {
+  margin-bottom: 28px;
+  color: var(--admin-ink);
+  font-size: clamp(2rem, 4vw, 3.5rem);
+}
+
+.doctors h1::before,
+.messages h1::before {
+  content: "ADMINISTRATION";
+  display: block;
+  margin-bottom: 10px;
+  color: var(--admin-coral-dark);
+  font-family: "DM Sans", sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+}
+
+.doctors .banner {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+}
+
+.doctors .banner .card,
+.messages .banner .card {
+  padding: 22px;
+  border: 1px solid var(--admin-line);
+  border-radius: 4px;
+  background: var(--admin-surface);
+  box-shadow: none;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.doctors .banner .card:hover,
+.messages .banner .card:hover {
+  box-shadow: var(--admin-shadow);
+  transform: translateY(-3px);
+}
+
+.doctors .banner .card img {
+  width: 130px;
+  height: 130px;
+  margin-bottom: 18px;
+  border: 5px solid var(--admin-mint);
+}
+
+.doctors .banner .card h4 {
+  margin-bottom: 18px;
+  color: var(--admin-ink);
+  font-size: 20px;
+}
+
+.doctors .banner .card div,
+.messages .banner .card div {
+  gap: 8px;
+  font-size: 13px;
+}
+
+.doctors .banner .card div p,
+.messages .banner .card div p {
+  color: var(--admin-ink-soft);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.doctors .banner .card div p span,
+.messages .banner .card div p span {
+  color: var(--admin-ink);
+  font-weight: 500;
+}
+
+.messages .banner {
+  gap: 14px;
+}
+
+.messages .banner .card div p:last-child {
+  padding-top: 10px;
+  border-top: 1px solid var(--admin-line);
+}
+
+.form-component {
+  min-height: 100vh;
+  padding: 64px 24px;
+  background: var(--admin-paper);
+}
+
+.form-component > .logo,
+.add-admin-form > .logo,
+.add-doctor-form > .logo {
+  display: none;
+}
+
+.form-title {
+  color: var(--admin-ink);
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  margin-bottom: 10px;
+}
+
+.form-component > p {
+  color: var(--admin-ink-soft);
+  font-size: 15px;
+}
+
+.form-component form {
+  width: min(100%, 760px);
+  margin-top: 22px;
+  padding: 30px;
+  gap: 16px;
+  border: 1px solid var(--admin-line);
+  border-radius: 4px;
+  background: var(--admin-surface);
+  box-shadow: var(--admin-shadow);
+}
+
+.form-component form div {
+  gap: 16px;
+}
+
+.form-component form input,
+.form-component form select,
+.form-component form textarea,
+.add-doctor-form form input,
+.add-doctor-form form select {
+  min-width: 0;
+  padding: 13px 15px;
+  color: var(--admin-ink);
+  background: #fbfcfb;
+  border: 1px solid var(--admin-line);
+  border-radius: 3px;
+  font-size: 14px;
+  outline: none;
+}
+
+.form-component form input:focus,
+.form-component form select:focus,
+.form-component form textarea:focus,
+.add-doctor-form form input:focus,
+.add-doctor-form form select:focus {
+  border-color: var(--admin-coral);
+  box-shadow: 0 0 0 3px rgba(231, 120, 92, 0.14);
+}
+
+.form-component button,
+.add-doctor-form button {
+  margin: 8px auto 0;
+  padding: 12px 24px;
+  color: #fff;
+  background: var(--admin-coral);
+  border: 0;
+  border-radius: 3px;
+  font-size: 14px;
+  letter-spacing: 0;
+}
+
+.form-component button:hover,
+.add-doctor-form button:hover {
+  background: var(--admin-coral-dark);
+  transform: translateY(-2px);
+}
+
+.admin-login {
+  align-items: stretch;
+}
+
+.admin-login .form-title {
+  font-size: clamp(2.5rem, 5vw, 4.4rem);
+}
+
+.admin-login form {
+  width: min(100%, 500px);
+}
+
+.add-admin-form,
+.add-doctor-form {
+  width: min(100%, 980px);
+  gap: 8px;
+}
+
+.add-doctor-form form .first-wrapper {
+  gap: 28px;
+}
+
+.add-doctor-form form .first-wrapper div:first-child {
+  flex: 0 1 280px;
+}
+
+.add-doctor-form form .first-wrapper div:first-child img {
+  height: 280px;
+  object-fit: cover;
+  border: 1px solid var(--admin-line);
+  border-radius: 4px;
+}
+
+.add-doctor-form form .first-wrapper div:last-child {
+  gap: 16px;
+}
+
+@media (max-width: 900px) {
+  .admin-main {
+    margin-left: 0;
+  }
+
+  .page {
+    padding-top: 76px;
+  }
+
+  .dashboard .banner:first-child {
+    flex-direction: column;
+  }
+
+  .dashboard .banner:first-child .firstBox,
+  .dashboard .banner:first-child .secondBox,
+  .dashboard .banner:first-child .thirdBox {
+    width: 100%;
+  }
+}
+
+@media (max-width: 620px) {
+  .form-component form,
+  .add-doctor-form form {
+    padding: 20px;
+  }
+
+  .form-component form div,
+  .add-doctor-form form .first-wrapper {
+    flex-direction: column;
+  }
+
+  .add-doctor-form form .first-wrapper div:first-child {
+    flex-basis: auto;
+    width: 100%;
+  }
+
+  .dashboard .banner:last-child {
+    padding: 14px;
+  }
+}
