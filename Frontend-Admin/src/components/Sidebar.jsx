@@ -19,7 +19,7 @@ const Sidebar = () => {
 
   const handleLogout = async () => {
     await axios
-      .get("http://localhost:4000/api/v1/user/admin/logout", {
+      .get("https://hospital-management-seven-gules.vercel.app/api/v1/user/admin/logout", {
         withCredentials: true,
       })
       .then((res) => {
@@ -66,3 +66,4 @@ const Sidebar = () => {
 };
 
 export default Sidebar;
+
